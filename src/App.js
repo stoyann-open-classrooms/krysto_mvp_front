@@ -6,7 +6,6 @@ import Header from "./components/Header/Header";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
-import CompleteProfil from "./pages/CompleteProfil/CompleteProfil";
 import AddTroc from "./pages/AddTroc/AddTroc";
 
 function App() {
@@ -19,7 +18,7 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/completeProfil" element={<CompleteProfil />} />
+
             <Route path="/addTroc" element={<AddTroc />} />
           </Routes>
         </div>

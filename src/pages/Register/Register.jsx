@@ -11,8 +11,27 @@ function Register() {
     email: "",
     password: "",
     password2: "",
+    image: "",
+    nom: "",
+    description: "",
+    prenom: "",
+    phone: "",
+    adresse: "",
+    pseudo: "",
+    villeId: 1,
   });
-  const { email, password, password2 } = formData;
+  const {
+    email,
+    password,
+    password2,
+    image,
+    nom,
+    prenom,
+    description,
+    phone,
+    adresse,
+    pseudo,
+  } = formData;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -32,12 +51,20 @@ function Register() {
     dispatch(reset());
   }, [user, isError, isSucces, message, navigate, dispatch]);
 
-  const onChange = (e) => {
+  const handleInput = (e) => {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
   };
+  const handleFile = (e) => {
+    console.log(e.target.files[0]);
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.files[0],
+    }));
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
     if (password !== password2) {
@@ -46,6 +73,13 @@ function Register() {
       const userData = {
         email,
         password,
+        image,
+        nom,
+        prenom,
+        description,
+        phone,
+        adresse,
+        pseudo,
       };
 
       dispatch(register(userData));
@@ -64,7 +98,7 @@ function Register() {
         <p>Créer un compte pour commencer a troquer</p>
       </section>
 
-      <section className="form">
+      <section className="form" encType="multipart/form-data">
         <form onSubmit={onSubmit}>
           <div className="form-group">
             <input
@@ -74,8 +108,87 @@ function Register() {
               name="email"
               value={email}
               placeholder="Entrer votre email"
-              onChange={onChange}
+              onChange={handleInput}
             />
+          </div>
+          <div className="form-group">
+            <label for="image">photo de profil</label>
+
+            <input
+              onChange={handleFile}
+              type="file"
+              id="image"
+              name="image"
+              accept="image/png, image/jpeg, image/png"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="text">nom</label>
+            <input
+              type="text"
+              name="nom"
+              id="nom"
+              value={nom}
+              onChange={handleInput}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="text">prenom</label>
+            <input
+              type="text"
+              name="prenom"
+              id="prenom"
+              value={prenom}
+              onChange={handleInput}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="text">pseudo</label>
+            <input
+              type="text"
+              name="pseudo"
+              id="pseudo"
+              value={pseudo}
+              onChange={handleInput}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="text">description</label>
+            <textarea
+              type="text"
+              name="description"
+              id="description"
+              value={description}
+              onChange={handleInput}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="text">telephone</label>
+            <input
+              type="number"
+              name="phone"
+              id="phone"
+              value={phone}
+              onChange={handleInput}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="text">adresse</label>
+            <input
+              type="text"
+              name="adresse"
+              id="adresse"
+              value={adresse}
+              onChange={handleInput}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="categorie">ville</label>
+            <select>
+              <option value="">Noumea</option>
+              <option value="">Bourail</option>
+              <option value="">La Foa</option>
+            </select>
           </div>
           <div className="form-group">
             <input
@@ -85,7 +198,7 @@ function Register() {
               name="password"
               value={password}
               placeholder="Entrer votre mot de passe"
-              onChange={onChange}
+              onChange={handleInput}
             />
           </div>
           <div className="form-group">
@@ -96,7 +209,7 @@ function Register() {
               name="password2"
               value={password2}
               placeholder="Confirmer votre mot de passe"
-              onChange={onChange}
+              onChange={handleInput}
             />
           </div>
           <div className="form-group">

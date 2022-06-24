@@ -5,7 +5,12 @@ const LOGIN_URL = "http://localhost:8000/krysto/api/auth/login";
 
 //register user
 const register = async (userData) => {
-  const response = await axios.post(REGISTER_URL, userData);
+  const config = {
+    headers: {
+      "Content-type": "multipart/form-data",
+    },
+  };
+  const response = await axios.post(REGISTER_URL, userData, config);
 
   if (response.data) {
     localStorage.setItem("user", JSON.stringify(response.data));

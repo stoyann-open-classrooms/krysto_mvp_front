@@ -30,7 +30,7 @@ export const store = configureStore({
     offres: offreReducer,
     offreCategories: offreCategorieReducer,
     partenaires: partenaireReducer,
-    profils: profilReducer,
+
     villes: villeReducer,
     recoltes: recolteReducer,
     transactions: transactionReducer,
